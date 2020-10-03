@@ -1,5 +1,5 @@
 import React from "react";
-const formatter = require("../helpers/formatterItems.js")
+const formatter = require("../helpers/formatterItems.js");
 
 const EARNING_COLOR = "#81ecec";
 const EXPENSE_COLOR = "#fab1a0";
@@ -17,16 +17,24 @@ export default function ListScreen({
 }) {
   return (
     <div>
-      <select
-        className="browser-default"
-        value={currentPeriod}
-        onChange={onPeriodChange}
-      >
-        {periods.map((period) => {
-          return <option key={period}>{period}</option>;
-        })}
-      </select>
-
+      <div style={{...styles.flexStyle, justifyContent: 'center'}}>
+        <button className="waves-effect waves-light btn" style={{marginRight: '5px'}}>
+          <i className="material-icons">chevron_left</i>
+        </button>
+        <select
+          className="browser-default"
+          value={currentPeriod}
+          onChange={onPeriodChange}
+          style={{maxWidth: '200px', marginRight: '5px'}}
+        >
+          {periods.map((period) => {
+            return <option key={period}>{period}</option>;
+          })}
+        </select>
+        <button className="waves-effect waves-light btn">
+          <i className="material-icons">chevron_right</i>
+        </button>
+      </div>
       <input
         type="text"
         placeholder="Filtro"
@@ -59,8 +67,8 @@ export default function ListScreen({
             }}
           >
             <div style={styles.flexStyle}>
-              <div style={{marginRight: '20px'}}>{transaction.day} </div>
-              <div style={{display: 'flex', flexDirection: 'column'}}>
+              <div style={{ marginRight: "20px" }}>{transaction.day} </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 <span>
                   <strong>{transaction.category} </strong>
                 </span>
@@ -71,18 +79,20 @@ export default function ListScreen({
             <div style={styles.buttonStyle}>
               <button
                 className="waves-effect waves-light btn"
-                id={transaction._id}
                 onClick={onEditTransaction}
               >
-                <i className="material-icons">edit</i>
+                <i id={transaction._id} className="material-icons">
+                  edit
+                </i>
               </button>
               <button
                 className="waves-effect waves-light btn red darken-4"
                 onClick={onDeleteTransaction}
-                id={transaction._id}
                 style={{ marginLeft: "10px" }}
               >
-                <i className="material-icons">delete</i>
+                <i id={transaction._id} className="material-icons">
+                  delete
+                </i>
               </button>
             </div>
           </div>
@@ -101,6 +111,6 @@ const styles = {
   flexStyle: {
     display: "flex",
     flexDirectuion: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
 };
