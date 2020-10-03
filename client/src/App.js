@@ -96,6 +96,7 @@ export default function App() {
 
   const handleDeleteTransaction = async (event) => {
     const id = event.target.id;
+    console.log(id)
 
     await api.delete(`${RESOURCE}/${id}`);
 
@@ -161,9 +162,10 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1 className="center">Desafio Final do Bootcamp Full Stack</h1>
 
       {currentScreen === LIST_SCREEN ? (
+     <div>
+       <h1 className="center">Controle Financeiro</h1>
         <ListScreen
           transactions={filteredTransactions}
           onFilterChange={handleFilterChange}
@@ -175,12 +177,16 @@ export default function App() {
           filteredText={filteredText}
           currentPeriod={currentPeriod}
         />
+     </div> 
       ) : (
-        <MaintenanceScreen
-          transaction={selectedTransaction}
-          onCancel={handleCancelMaintenance}
-          onSave={handleSaveMaintenance}
-        />
+        <div>
+          {newTransaction ? <h1 className="center">Nova Transação</h1> : <h1 className="center">Atualização da Transação</h1>}
+          <MaintenanceScreen
+            transaction={selectedTransaction}
+            onCancel={handleCancelMaintenance}
+            onSave={handleSaveMaintenance}
+          />
+        </div>
       )}
     </div>
   );
